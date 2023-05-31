@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// migrar npm prisma migrate dev
+// migrar npx prisma migrate dev
 model User {
   id         String    @id @default(uuid()) @db.VarChar(150)
   name       String    @db.VarChar(100)
@@ -17,4 +17,66 @@ model User {
   updated_at DateTime? @default(now())
 
   @@map("users")
+}
+
+model Category {
+  id         String    @id @default(uuid()) @db.VarChar(150)
+  name       String    @db.VarChar(100)
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  // Relacionamento categorias
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id          String    @id @default(uuid()) @db.VarChar(150)
+  name        String    @db.VarChar(100)
+  price       Decimal   @db.Decimal(5, 2)
+  banner      String    @db.VarChar(100)
+  description String
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+
+  // Relacionamento categorias
+  Category    Category? @relation(fields: [category_id], references: [id])
+  category_id String
+
+  // Relacionamento Order
+  ordem_itens OrderItem[]
+
+  @@map("products")
+}
+
+model Order {
+  id          String    @id @default(uuid()) @db.VarChar(150)
+  table       Int
+  status      Boolean   @default(false) // Usar ENUM depois
+  draft       Boolean   @default(true)
+  name        String?   @db.VarChar(100)
+  started_at  DateTime? @default(now())
+  finished_at DateTime? @default(now())
+  total_time  DateTime?
+
+  // Relacionamentos Order
+  ordem_itens OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id     String @id @default(uuid()) @db.VarChar(150)
+  amount Int    @default(0)
+
+  // Relacionamentos Order
+  Order    Order?  @relation(fields: [order_id], references: [id])
+  order_id String? @db.VarChar(150)
+
+  // Relacionamentos Produtos
+  Product    Product? @relation(fields: [product_id], references: [id])
+  product_id String?  @db.VarChar(150)
+
+  @@map("ordem_itens")
 }
