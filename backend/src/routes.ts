@@ -7,7 +7,6 @@ router.get("/test", (req: Request, res: Response) => {
     response: { 
       route: "http://localhost:8080/test", 
       method: "GET", 
-      status: 200,
       message: "Server Working" },
   });
 });
