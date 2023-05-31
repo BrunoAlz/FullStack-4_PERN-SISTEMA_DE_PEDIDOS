@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 
 class CreateUserController {
   async handleCreation(req: Request, res: Response) {
-    console.log(req.body);
+    const { name, email, password } = req.body;
+    
     return res.json({ ok: true, data: req.body });
   }
 }
