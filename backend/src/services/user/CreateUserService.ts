@@ -1,6 +1,9 @@
+import { CreateUserRequest } from "../../interfaces/UserInterfaces";
+
+
 class CreateUserService {
-  async execute() {
-    return { user: "USUÁRIO CRIADO" };
+  async execute({ name, email, password }: CreateUserRequest) {
+    return { name, email, password };
   }
 }
 
