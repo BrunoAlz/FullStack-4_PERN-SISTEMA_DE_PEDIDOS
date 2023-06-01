@@ -10,7 +10,7 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
   }
 
   // Cria um array vazio para guardar os erros extraidos da requisição
-  const extractedErros: any[] = [];
+  const extractedErros: Error[] = [];
 
   // Se forem recuperados erros da requisição faz o push para o Array
   errors.array().map((err) => extractedErros.push(err.msg));
