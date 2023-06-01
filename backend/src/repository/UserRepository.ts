@@ -8,6 +8,11 @@ class UserRepository {
         email: email,
         password: password,
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
     });
 
     return user;
@@ -21,7 +26,7 @@ class UserRepository {
       select: {
         email: true,
       },
-    });   
+    });
     return !!user;
   }
 }
