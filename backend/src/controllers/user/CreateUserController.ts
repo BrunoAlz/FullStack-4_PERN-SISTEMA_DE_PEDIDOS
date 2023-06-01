@@ -12,7 +12,7 @@ class CreateUserController {
       password,
     });
 
-    return res.json({ ok: true, service_response: user });
+    return res.json({service_response: user });
   }
 }
 
