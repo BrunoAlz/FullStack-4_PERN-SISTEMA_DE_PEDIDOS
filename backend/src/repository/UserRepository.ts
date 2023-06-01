@@ -10,7 +10,19 @@ class UserRepository {
       },
     });
 
-    return user
+    return user;
+  }
+
+  async getUserByEmail({ email }: any) {
+    const user = await prismaClient.user.findFirst({
+      where: {
+        email: email,
+      },
+      select: {
+        email: true,
+      },
+    });   
+    return !!user;
   }
 }
 
