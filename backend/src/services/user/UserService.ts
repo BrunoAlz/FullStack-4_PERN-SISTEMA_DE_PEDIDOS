@@ -1,5 +1,6 @@
 import { CreateUserRequest } from "../../interfaces/UserInterfaces";
 import { UserRepository } from "../../repository/UserRepository";
+import { responseMessages } from "../../constants/responseMessages";
 
 class UserService {
   async create({ name, email, password }: CreateUserRequest) {
@@ -7,7 +8,7 @@ class UserService {
     const checkEmail = await userRepository.getUserByEmail({ email });
 
     if (checkEmail) {
-      throw new Error("Já existe um usuário com este Email.");
+      return responseMessages.emailInUse;
     }
 
     const user = await userRepository.createUser({ name, email, password });
