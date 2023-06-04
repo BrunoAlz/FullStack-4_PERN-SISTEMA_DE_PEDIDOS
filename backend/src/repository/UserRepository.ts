@@ -24,6 +24,7 @@ class UserRepository {
         email: email,
       },
       select: {
+        id: true,
         email: true,
         password: true
       },
