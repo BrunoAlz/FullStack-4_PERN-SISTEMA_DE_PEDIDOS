@@ -2,14 +2,18 @@ import { Request, Response } from "express";
 import { AuthUserService } from "../../services/auth/AuthUserService";
 
 class AuthUserController {
-  async login(req: Request, res: Response) {
-    const { email, password } = req.body;
-    const authUserService = new AuthUserService();
+  authUserService: AuthUserService;
+  constructor() {
+    this.authUserService = new AuthUserService();
+  }
 
-    const auth = await authUserService.login({ email, password });
+  login = async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+
+    const auth = await this.authUserService.login({ email, password });
 
     return res.json(auth);
-  }
+  };
 }
 
 export { AuthUserController };

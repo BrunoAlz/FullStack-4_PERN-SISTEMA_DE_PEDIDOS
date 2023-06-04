@@ -5,10 +5,14 @@ import { UserRepository } from "../../repository/UserRepository";
 import { JWT } from "../../utils/GenerateJWT";
 
 class AuthUserService {
-  async login({ email, password }: LoginUserRequest) {
-    const userRepository = new UserRepository();
+  userRepository: UserRepository;
 
-    const user = await userRepository.getUserByEmail({ email });
+  constructor() {
+    this.userRepository = new UserRepository();
+  }
+
+  login = async ({ email, password }: LoginUserRequest) => {
+    const user = await this.userRepository.getUserByEmail({ email });
     if (!user) {
       return responseMessages.credentialsError;
     }
@@ -22,7 +26,7 @@ class AuthUserService {
     const token = jwt.generateToken(user.id, user.email);
 
     return { token };
-  }
+  };
 }
 
 export { AuthUserService };

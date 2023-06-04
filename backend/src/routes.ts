@@ -16,11 +16,18 @@ router.post(
   new UserController().create
 );
 
+// router.post(
+//   "/user/details",
+//   new UserController().details
+// );
+
 router.post(
   "/auth/login",
   userLoginValidation(),
   validate,
   new AuthUserController().login
 );
+
+
 
 export { router };

@@ -3,13 +3,18 @@ import { UserService } from "../../services/user/UserService";
 import { hash } from "bcryptjs";
 
 class UserController {
-  async create(req: Request, res: Response) {
+  userService: UserService;
+
+  constructor() {
+    this.userService = new UserService();
+  }
+
+  create = async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
-    const userService = new UserService();
 
     const passwordHash = await hash(password, 10);
 
-    const user = await userService.create({
+    const user = await this.userService.create({
       name,
       email,
       password: passwordHash,
@@ -17,6 +22,13 @@ class UserController {
 
     return res.json(user);
   }
+
+  // async details(req: Request, res: Response) {
+  //   const { name, email, password } = req.body;
+  //   const user = "c";
+
+  //   return res.json(user);
+  // }
 }
 
 export { UserController };

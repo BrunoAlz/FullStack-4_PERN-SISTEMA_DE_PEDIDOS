@@ -3,17 +3,25 @@ import { UserRepository } from "../../repository/UserRepository";
 import { responseMessages } from "../../constants/responseMessages";
 
 class UserService {
-  async create({ name, email, password }: CreateUserRequest) {
-    const userRepository = new UserRepository();
-    const emailExists = await userRepository.verifyEmail({ email });
+  userRepository: UserRepository;
+  constructor() {
+    this.userRepository = new UserRepository();
+  }
+
+  create = async ({ name, email, password }: CreateUserRequest) => {
+    const emailExists = await this.userRepository.verifyEmail({ email });
 
     if (emailExists) {
       return responseMessages.emailInUse;
     }
 
-    const user = await userRepository.createUser({ name, email, password });
+    const user = await this.userRepository.createUser({
+      name,
+      email,
+      password,
+    });
     return user;
-  }
+  };
 }
 
 export { UserService };
