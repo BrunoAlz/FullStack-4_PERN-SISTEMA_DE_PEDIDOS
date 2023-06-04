@@ -4,4 +4,9 @@ interface CreateUserRequest {
   password: String;
 }
 
-export { CreateUserRequest };
+interface LoginUserRequest {
+  email: String;
+  password: String;
+}
+
+export { CreateUserRequest, LoginUserRequest };

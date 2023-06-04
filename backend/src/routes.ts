@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { UserController } from "./controllers/user/UserController";
-import { userCreateValidation } from "./middlewares/userValidations";
+import { AuthUserController } from "./controllers/user/auth/AuthUserController";
+import {
+  userCreateValidation,
+  userLoginValidation,
+} from "./middlewares/userValidations";
 import { validate } from "./middlewares/handleValidation";
 
 const router = Router();
@@ -10,6 +14,13 @@ router.post(
   userCreateValidation(),
   validate,
   new UserController().create
+);
+
+router.post(
+  "/auth/login",
+  userLoginValidation(),
+  validate,
+  new AuthUserController().login
 );
 
 export { router };
