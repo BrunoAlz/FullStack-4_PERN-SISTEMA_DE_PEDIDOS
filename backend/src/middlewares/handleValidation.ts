@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
+import { verify } from "jsonwebtoken";
 
 const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
@@ -17,4 +18,10 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export { validate };
+const isAuth = (req: Request, res: Response, next: NextFunction) => {
+  console.log("CHAMOU O MIDDLE");
+  
+  next();
+};
+
+export { validate, isAuth };

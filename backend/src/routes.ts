@@ -5,7 +5,7 @@ import {
   userCreateValidation,
   userLoginValidation,
 } from "./middlewares/userValidations";
-import { validate } from "./middlewares/handleValidation";
+import { isAuth, validate } from "./middlewares/handleValidation";
 
 const router = Router();
 
@@ -18,6 +18,7 @@ router.post(
 
 router.get(
   "/user/details",
+  isAuth,
   new UserController().details
 );
 
