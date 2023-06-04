@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import { verify } from "jsonwebtoken";
+import { AuthPayload } from "../interfaces/UserInterfaces";
+import { responseMessages } from "../constants/responseMessages";
 
 const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
@@ -19,8 +21,24 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const isAuth = (req: Request, res: Response, next: NextFunction) => {
-  console.log("CHAMOU O MIDDLE");
-  
+  const authToken = req.headers.authorization;
+
+  if (!authToken) {
+    return res.status(401).json(responseMessages.nonExistentToken);
+  }
+
+  const [, token] = authToken.split(" ");
+
+  try {
+    const { sub: userId } = verify(
+      token,
+      process.env.JWT_SECRET
+    ) as AuthPayload;
+    console.log(userId);
+  } catch (error) {
+    return res.status(401).json(responseMessages.invalidToken);
+  }
+
   next();
 };
 

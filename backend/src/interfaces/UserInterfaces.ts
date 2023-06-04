@@ -9,5 +9,8 @@ interface LoginUserRequest {
   password: string;
 }
 
+interface AuthPayload {
+  sub: string;
+}
 
-export { CreateUserRequest, LoginUserRequest };
+export { CreateUserRequest, LoginUserRequest, AuthPayload };

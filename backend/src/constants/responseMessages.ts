@@ -17,7 +17,7 @@ const responseMessages = {
   emailInUse: {
     error: "Já existe um usuário com esse e-mail.",
   },
-  nonexistentToken: {
+  nonExistentToken: {
     error: "Token de autenticação não fornecido.",
   },
   invalidToken: {
