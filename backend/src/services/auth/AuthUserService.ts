@@ -1,6 +1,7 @@
 import { responseMessages } from "../../constants/responseMessages";
 import { LoginUserRequest } from "../../interfaces/UserInterfaces";
 import { UserRepository } from "../../repository/UserRepository";
+import { JWT } from "../../utils/GenerateJWT";
 import { PasswordHandle } from "../../utils/PasswordUtils";
 
 class AuthUserService {
@@ -18,7 +19,10 @@ class AuthUserService {
       return responseMessages.credentialsError;
     }
 
-    return user;
+    const jwt = new JWT();
+    const token = jwt.generateToken(user.id, user.email);
+
+    return { token };
   }
 }
 
