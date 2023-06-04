@@ -7,6 +7,6 @@ const router = Router();
 
 router.use("/user", userRoutes);
 router.use("/auth", authRoutes);
-router.use("/categories", categoryRoutes);
+router.use("/category", categoryRoutes);
 
 export { router };

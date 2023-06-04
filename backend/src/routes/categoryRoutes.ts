@@ -3,7 +3,8 @@ import { CategoryController } from "../controllers/category/CategoryController";
 import { isAuth } from "../middlewares/handleValidation";
 
 const router = Router();
+const categoryController = new CategoryController();
 
-router.post("/create", isAuth, new CategoryController().create);
+router.post("/create", isAuth, categoryController.create);
 
 export { router as categoryRoutes };
