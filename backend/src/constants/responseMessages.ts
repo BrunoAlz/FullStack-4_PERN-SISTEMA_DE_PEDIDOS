@@ -29,6 +29,9 @@ const responseMessages = {
   userCreated: "Usuário registrado com sucesso.",
   userUpdated: "Usuário atualizado com sucesso.",
   userDeleted: "Usuário excluído com sucesso.",
+  categoryExists: {
+    error: "Está categoria já foi cadastrada."
+  }
 };
 
 export { responseMessages };
