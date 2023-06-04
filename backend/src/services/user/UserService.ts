@@ -22,6 +22,11 @@ class UserService {
     });
     return user;
   };
+
+  details = async (email: string) => {
+    const user = await this.userRepository.getUserByEmail(email);
+    return user;
+  };
 }
 
 export { UserService };

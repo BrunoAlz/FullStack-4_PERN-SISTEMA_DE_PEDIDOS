@@ -11,7 +11,6 @@ class UserController {
 
   create = async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
-
     const passwordHash = await hash(password, 10);
 
     const user = await this.userService.create({
@@ -21,14 +20,13 @@ class UserController {
     });
 
     return res.json(user);
-  }
+  };
 
-  // async details(req: Request, res: Response) {
-  //   const { name, email, password } = req.body;
-  //   const user = "c";
+  details = async (req: Request, res: Response) => {
+    const user = this.userService.details("email");
 
-  //   return res.json(user);
-  // }
+    return res.json({ok:true});
+  };
 }
 
 export { UserController };

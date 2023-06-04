@@ -16,10 +16,10 @@ router.post(
   new UserController().create
 );
 
-// router.post(
-//   "/user/details",
-//   new UserController().details
-// );
+router.get(
+  "/user/details",
+  new UserController().details
+);
 
 router.post(
   "/auth/login",
