@@ -1,17 +1,24 @@
 import { responseMessages } from "../../constants/responseMessages";
 import { LoginUserRequest } from "../../interfaces/UserInterfaces";
 import { UserRepository } from "../../repository/UserRepository";
+import { PasswordHandle } from "../../utils/PasswordUtils";
 
 class AuthUserService {
   async login({ email, password }: LoginUserRequest) {
     const userRepository = new UserRepository();
-    const emailExists = await userRepository.verifyEmail({ email });
+    const pass = new PasswordHandle();
 
-    if (!emailExists) {
+    const user = await userRepository.getUserByEmail({ email });
+    if (!user) {
       return responseMessages.credentialsError;
     }
 
-    return emailExists;
+    const matchPassword = await pass.passwordCompare(password, user.password);
+    if (!matchPassword) {
+      return responseMessages.credentialsError;
+    }
+
+    return user;
   }
 }
 

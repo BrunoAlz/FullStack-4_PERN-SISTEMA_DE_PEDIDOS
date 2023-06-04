@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 import { UserService } from "../../services/user/UserService";
-import passwordEncrypt from "../../utils/passwordEncrypt";
+import { PasswordHandle } from "../../utils/PasswordUtils";
+
 
 class UserController {
   async create(req: Request, res: Response) {
     const { name, email, password } = req.body;
     const userService = new UserService();
+    const pass = new PasswordHandle();
 
-    const passwordHash = await passwordEncrypt(password);
+    const passwordHash = await pass.passwordEncrypt(password);
 
     const user = await userService.create({
       name,

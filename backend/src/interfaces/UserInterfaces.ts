@@ -6,7 +6,8 @@ interface CreateUserRequest {
 
 interface LoginUserRequest {
   email: String;
-  password: String;
+  password: string;
 }
+
 
 export { CreateUserRequest, LoginUserRequest };
