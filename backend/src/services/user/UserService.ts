@@ -23,8 +23,8 @@ class UserService {
     return user;
   };
 
-  details = async (email: string) => {
-    const user = await this.userRepository.getUserByEmail(email);
+  details = async (id: string) => {
+    const user = await this.userRepository.getUserById({ id });
     return user;
   };
 }

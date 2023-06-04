@@ -23,9 +23,8 @@ class UserController {
   };
 
   details = async (req: Request, res: Response) => {
-    const user = this.userService.details("email");
-
-    return res.json({ok:true});
+    const user = await this.userService.details(req.userId);
+    return res.json(user);
   };
 }
 
