@@ -1,11 +1,12 @@
 import { LoginUserRequest } from "../../interfaces/UserInterfaces";
-import prismaClient from "../../prisma";
+import { UserRepository } from "../../repository/UserRepository";
 
 class AuthUserService {
   async login({ email, password }: LoginUserRequest) {
-    
+    const userRepository = new UserRepository();
+    const emailExists = await userRepository.getUserByEmail({ email });
 
-    return { email };
+    return { emailExists };
   }
 }
 
