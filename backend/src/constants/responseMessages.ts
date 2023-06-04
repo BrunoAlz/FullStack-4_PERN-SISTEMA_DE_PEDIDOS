@@ -23,6 +23,9 @@ const responseMessages = {
   invalidToken: {
     error: "Token de autenticação inválido.",
   },
+  credentialsError: {
+    error: "Credenciais Inválidas, verifique seu email e senha.",
+  },
   userCreated: "Usuário registrado com sucesso.",
   userUpdated: "Usuário atualizado com sucesso.",
   userDeleted: "Usuário excluído com sucesso.",
