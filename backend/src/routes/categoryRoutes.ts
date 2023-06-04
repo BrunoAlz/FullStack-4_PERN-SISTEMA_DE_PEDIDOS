@@ -6,5 +6,6 @@ const router = Router();
 const categoryController = new CategoryController();
 
 router.post("/create", isAuth, categoryController.create);
+router.get("/list", isAuth, categoryController.list);
 
 export { router as categoryRoutes };

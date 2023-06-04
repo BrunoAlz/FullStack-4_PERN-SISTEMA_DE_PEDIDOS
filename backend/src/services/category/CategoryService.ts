@@ -9,10 +9,15 @@ class CategoryService {
   }
 
   create = async ({ category }: CreateCategory) => {
-    const createdCategory = await this.categoryRepository.createCategory(
-      {category}
-    );
+    const createdCategory = await this.categoryRepository.createCategory({
+      category,
+    });
     return createdCategory;
+  };
+
+  list = async () => {
+    const getAllCategories = await this.categoryRepository.getAllCategories();
+    return getAllCategories;
   };
 }
 

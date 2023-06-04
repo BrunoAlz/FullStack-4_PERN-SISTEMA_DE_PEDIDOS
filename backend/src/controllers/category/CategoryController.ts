@@ -14,6 +14,11 @@ class CategoryController {
     const createdCategory = await this.categoryService.create({ category });
     return res.status(201).json(createdCategory);
   };
+
+  list = async (req: Request, res: Response) => {
+    const getAllCategories = await this.categoryService.list();
+    return res.status(200).json(getAllCategories);
+  };
 }
 
 export { CategoryController };

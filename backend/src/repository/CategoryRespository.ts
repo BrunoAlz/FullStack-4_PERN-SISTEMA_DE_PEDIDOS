@@ -8,11 +8,16 @@ class CategoryRepository {
       },
       select: {
         id: true,
-        name: true
+        name: true,
       },
     });
 
     return user;
+  }
+
+  async getAllCategories() {
+    const getAll = await prismaClient.category.findMany();
+    return getAll;
   }
 }
 
