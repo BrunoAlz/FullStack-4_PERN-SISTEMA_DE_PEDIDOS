@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UserController } from "./controllers/user/UserController";
-import { AuthUserController } from "./controllers/user/auth/AuthUserController";
+import { AuthUserController } from "./controllers/auth/AuthUserController";
 import {
   userCreateValidation,
   userLoginValidation,
