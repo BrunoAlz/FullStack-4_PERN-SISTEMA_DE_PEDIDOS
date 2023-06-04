@@ -25,6 +25,19 @@ class UserRepository {
       },
       select: {
         email: true,
+        password: true
+      },
+    });
+    return user;
+  }
+
+  async verifyEmail({ email }: any) {
+    const user = await prismaClient.user.findFirst({
+      where: {
+        email: email,
+      },
+      select: {
+        email: true,
       },
     });
     return !!user;

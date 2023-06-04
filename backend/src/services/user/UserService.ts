@@ -5,7 +5,7 @@ import { responseMessages } from "../../constants/responseMessages";
 class UserService {
   async create({ name, email, password }: CreateUserRequest) {
     const userRepository = new UserRepository();
-    const emailExists = await userRepository.getUserByEmail({ email });
+    const emailExists = await userRepository.verifyEmail({ email });
 
     if (emailExists) {
       return responseMessages.emailInUse;

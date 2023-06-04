@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../../services/user/UserService";
-import passwordEncrypt from "../../middlewares/passwordEncrypt";
+import passwordEncrypt from "../../utils/passwordEncrypt";
 
 class UserController {
   async create(req: Request, res: Response) {

@@ -5,7 +5,7 @@ import { UserRepository } from "../../repository/UserRepository";
 class AuthUserService {
   async login({ email, password }: LoginUserRequest) {
     const userRepository = new UserRepository();
-    const emailExists = await userRepository.getUserByEmail({ email });
+    const emailExists = await userRepository.verifyEmail({ email });
 
     if (!emailExists) {
       return responseMessages.credentialsError;
