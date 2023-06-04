@@ -1,15 +1,13 @@
 import { Request, Response } from "express";
 import { UserService } from "../../services/user/UserService";
-import { PasswordHandle } from "../../utils/PasswordUtils";
-
+import { hash } from "bcryptjs";
 
 class UserController {
   async create(req: Request, res: Response) {
     const { name, email, password } = req.body;
     const userService = new UserService();
-    const pass = new PasswordHandle();
 
-    const passwordHash = await pass.passwordEncrypt(password);
+    const passwordHash = await hash(password, 10);
 
     const user = await userService.create({
       name,
