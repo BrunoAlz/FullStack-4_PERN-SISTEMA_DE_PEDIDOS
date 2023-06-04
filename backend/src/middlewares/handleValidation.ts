@@ -34,7 +34,10 @@ const isAuth = (req: Request, res: Response, next: NextFunction) => {
       token,
       process.env.JWT_SECRET
     ) as AuthPayload;
-    console.log(userId);
+
+    // Injetando o usuário do Token na Requisição
+    req.userId = userId;
+
   } catch (error) {
     return res.status(401).json(responseMessages.invalidToken);
   }
