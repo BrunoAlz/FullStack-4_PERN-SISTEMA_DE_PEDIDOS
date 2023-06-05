@@ -26,12 +26,18 @@ const responseMessages = {
   credentialsError: {
     error: "Credenciais Inválidas, verifique seu email e senha.",
   },
-  userCreated: "Usuário registrado com sucesso.",
-  userUpdated: "Usuário atualizado com sucesso.",
-  userDeleted: "Usuário excluído com sucesso.",
+  userCreated: {
+    success: "Usuário registrado com sucesso.",
+  },
+  userUpdated: {
+    success: "Usuário atualizado com sucesso.",
+  },
+  userDeleted: {
+    success: "Usuário excluído com sucesso.",
+  },
   categoryExists: {
-    error: "Está categoria já foi cadastrada."
-  }
+    error: "Está categoria já foi cadastrada.",
+  },
 };
 
 export { responseMessages };
