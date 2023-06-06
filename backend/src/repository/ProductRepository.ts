@@ -30,6 +30,16 @@ class ProductRepository {
     return product;
   }
 
+  async getProductsByCategory(id: string) {
+    const products = await prismaClient.product.findMany({
+      where: {
+        category_id: id,
+      },
+    });
+
+    return products;
+  }
+
   async checkIfProductExists(name: string) {
     const product = await prismaClient.product.findFirst({
       where: {

@@ -26,6 +26,14 @@ class ProductController {
 
     return res.json(createdProduct);
   };
+
+  getProductsByCategory = async (req: Request, res: Response) => {
+    const { id } = req.query.id as any;
+
+    const products = await this.productService.getProductsByCategory(id);
+
+    return res.json(products);
+  };
 }
 
 export { ProductController };

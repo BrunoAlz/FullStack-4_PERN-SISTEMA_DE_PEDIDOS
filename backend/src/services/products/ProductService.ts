@@ -27,6 +27,11 @@ class ProductService {
 
     return createdProduct;
   };
+
+  getProductsByCategory = async (id: string) => {
+    const products = await this.productRepository.getProductsByCategory(id);
+    return products;
+  };
 }
 
 export { ProductService };

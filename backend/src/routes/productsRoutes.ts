@@ -10,5 +10,11 @@ const upload = multer(uploadConfig.upload("temp"));
 const productController = new ProductController();
 
 router.post("/create", isAuth, upload.single("file"), productController.create);
+router.get(
+  "/category/",
+  isAuth,
+  upload.single("file"),
+  productController.getProductsByCategory
+);
 
 export { router as productRoutes };
