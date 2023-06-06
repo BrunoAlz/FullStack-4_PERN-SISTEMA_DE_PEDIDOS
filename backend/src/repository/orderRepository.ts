@@ -8,11 +8,10 @@ class OrdersRepository {
     this.prisma = prismaClient;
   }
 
-  async createOrder({ table, draft, name }) {
+  async createOrder({ table, name }) {
     const order = await this.prisma.order.create({
       data: {
         table: table,
-        draft: draft,
         name: name,
       },
     });

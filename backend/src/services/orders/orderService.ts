@@ -7,10 +7,9 @@ class OrderService {
     this.orderRepository = new OrdersRepository();
   }
 
-  create = async ({ table, draft, name }) => {
+  create = async ({ table, name }) => {
     const order = await this.orderRepository.createOrder({
       table,
-      draft,
       name,
     });
 

@@ -9,9 +9,9 @@ class OrderController {
   }
 
   create = async (req: Request, res: Response) => {
-    const { table, draft, name } = req.body;
+    const { table, name } = req.body;
 
-    return res.json({ table, draft, name });
+    return res.json({ table, name });
   };
 }
 
