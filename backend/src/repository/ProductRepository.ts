@@ -29,6 +29,19 @@ class ProductRepository {
 
     return product;
   }
+
+  async checkIfProductExists(name: string) {
+    const product = await prismaClient.product.findFirst({
+      where: {
+        name: name,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    return !!product;
+  }
 }
 
 export { ProductRepository };

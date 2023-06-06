@@ -1,4 +1,4 @@
-import { CreateProductRequest } from "../../interfaces/ProductInterfaces";
+import { responseMessages } from "../../constants/responseMessages";
 import { ProductRepository } from "../../repository/ProductRepository";
 
 class ProductService {
@@ -8,13 +8,15 @@ class ProductService {
     this.productRepository = new ProductRepository();
   }
 
-  create = async ({
-    name,
-    price,
-    banner,
-    description,
-    category_id,
-  }: CreateProductRequest) => {
+  create = async ({ name, price, banner, description, category_id }) => {
+    const checkProduct = await this.productRepository.checkIfProductExists(
+      name
+    );
+
+    if (checkProduct) {
+      return responseMessages.productExists;
+    }
+
     const createdProduct = await this.productRepository.createProduct({
       name,
       price,

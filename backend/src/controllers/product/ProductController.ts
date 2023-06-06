@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-
 import { ProductService } from "../../services/products/ProductService";
 import { responseMessages } from "../../constants/responseMessages";
 
@@ -25,7 +24,7 @@ class ProductController {
       category_id,
     });
 
-    return res.status(201).json(createdProduct);
+    return res.json(createdProduct);
   };
 }
 
