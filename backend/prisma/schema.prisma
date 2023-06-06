@@ -14,7 +14,7 @@ model User {
   email      String    @db.VarChar(150)
   password   String    @db.VarChar(150)
   created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
 
   @@map("users")
 }
@@ -23,7 +23,7 @@ model Category {
   id         String    @id @default(uuid()) @db.VarChar(150)
   name       String    @db.VarChar(100)
   created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
 
   // Relacionamento categorias
   products Product[]
@@ -38,7 +38,7 @@ model Product {
   banner      String    @db.VarChar(100)
   description String
   created_at  DateTime? @default(now())
-  updated_at  DateTime? @default(now())
+  updated_at  DateTime? @updatedAt
 
   // Relacionamento categorias
   Category    Category? @relation(fields: [category_id], references: [id])
@@ -57,8 +57,8 @@ model Order {
   draft       Boolean   @default(true)
   name        String?   @db.VarChar(100)
   started_at  DateTime? @default(now())
-  finished_at DateTime? @default(now())
-  total_time  DateTime?
+  finished_at DateTime? @updatedAt
+  total_time  String?
 
   // Relacionamentos Order
   ordem_itens OrderItem[]
