@@ -9,7 +9,7 @@ class OrderItemRepository {
   }
 
   async addItem({ amount, order_id, product_id }) {
-    const order = await this.prisma.orderItem.create({
+    const item = await this.prisma.orderItem.create({
       data: {
         amount: amount,
         order_id: order_id,
@@ -17,7 +17,12 @@ class OrderItemRepository {
       },
     });
 
-    return order;
+    return item;
+  }
+
+  async removeItem(id: string) {
+    const item = await this.prisma.orderItem.delete({ where: { id: id } });
+    return item;
   }
 }
 

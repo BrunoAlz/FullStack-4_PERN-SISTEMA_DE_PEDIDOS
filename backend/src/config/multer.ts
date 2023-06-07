@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import multer from "multer";
 
-import { extname, resolve } from "path";
+import { resolve } from "path";
 import { ProductRepository } from "../repository/ProductRepository";
 import { responseMessages } from "../constants/responseMessages";
 

@@ -39,6 +39,11 @@ class OrderService {
 
     return item;
   };
+
+  deleteItemFromOrder = async (id: string) => {
+    const item = await this.orderItemRepository.removeItem(id);
+    return item;
+  };
 }
 
 export { OrderService };
