@@ -10,6 +10,6 @@ router.get("/list", isAuth, orderController.list);
 router.post("/delete", isAuth, orderController.delete);
 
 router.post("/additem", isAuth, orderController.addItem);
-router.post("/removeitem", isAuth, orderController.removeItem);
+router.delete("/removeitem", isAuth, orderController.removeItem);
 
 export { router as orderRoutes };
