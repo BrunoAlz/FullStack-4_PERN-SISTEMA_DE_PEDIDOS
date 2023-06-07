@@ -18,6 +18,11 @@ class OrdersRepository {
 
     return order;
   }
+
+  async listAll() {
+    const orders = await this.prisma.order.findMany();
+    return orders;
+  }
 }
 
 export { OrdersRepository };

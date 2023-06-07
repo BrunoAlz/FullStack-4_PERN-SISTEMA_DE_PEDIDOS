@@ -15,6 +15,12 @@ class OrderController {
 
     return res.json(order);
   };
+
+  list = async (req: Request, res: Response) => {
+    const orders = await this.orderService.list();
+
+    return res.json(orders);
+  };
 }
 
 export { OrderController };

@@ -15,6 +15,12 @@ class OrderService {
 
     return order;
   };
+
+  list = async () => {
+    const orders = await this.orderRepository.listAll();
+
+    return orders;
+  };
 }
 
 export { OrderService };

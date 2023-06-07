@@ -6,5 +6,6 @@ const router = Router();
 const orderController = new OrderController();
 
 router.post("/create", isAuth, orderController.create);
+router.get("/list", isAuth, orderController.list);
 
 export { router as orderRoutes };
