@@ -9,4 +9,6 @@ router.post("/create", isAuth, orderController.create);
 router.get("/list", isAuth, orderController.list);
 router.post("/delete", isAuth, orderController.delete);
 
+router.post("/additem", isAuth, orderController.addItem);
+
 export { router as orderRoutes };
