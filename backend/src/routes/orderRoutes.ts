@@ -7,5 +7,6 @@ const orderController = new OrderController();
 
 router.post("/create", isAuth, orderController.create);
 router.get("/list", isAuth, orderController.list);
+router.post("/delete", isAuth, orderController.delete);
 
 export { router as orderRoutes };

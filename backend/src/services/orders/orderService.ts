@@ -21,6 +21,11 @@ class OrderService {
 
     return orders;
   };
+
+  delete = async (id: string) => {
+    const order = await this.orderRepository.deleteOrder(id);
+    return order;
+  };
 }
 
 export { OrderService };

@@ -23,6 +23,16 @@ class OrdersRepository {
     const orders = await this.prisma.order.findMany();
     return orders;
   }
+
+  async deleteOrder(id: string) {
+    const order = await this.prisma.order.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    return order;
+  }
 }
 
 export { OrdersRepository };

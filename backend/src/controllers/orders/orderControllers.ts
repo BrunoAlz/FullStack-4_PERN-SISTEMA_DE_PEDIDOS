@@ -21,6 +21,13 @@ class OrderController {
 
     return res.json(orders);
   };
+
+  delete = async (req: Request, res: Response) => {
+    const id = req.query.id as string;
+    const order = await this.orderService.delete(id);
+
+    return res.json(order);
+  };
 }
 
 export { OrderController };
