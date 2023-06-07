@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import prismaClient from "../prisma";
+import { responseMessages } from "../constants/responseMessages";
 
 class OrderItemRepository {
   private prisma: PrismaClient;
@@ -21,8 +22,14 @@ class OrderItemRepository {
   }
 
   async removeItem(id: string) {
-    const item = await this.prisma.orderItem.delete({ where: { id: id } });
-    return item;
+    try {
+      const item = await this.prisma.orderItem.delete({
+        where: { id: id },
+      });
+      return item;
+    } catch (error) {
+      return responseMessages.notFound;
+    }
   }
 }
 
