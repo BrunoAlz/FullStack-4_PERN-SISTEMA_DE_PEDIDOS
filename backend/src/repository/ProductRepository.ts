@@ -1,7 +1,14 @@
+import { PrismaClient } from "@prisma/client";
 import { CreateProductRequest } from "../interfaces/ProductInterfaces";
 import prismaClient from "../prisma";
 
 class ProductRepository {
+  prisma: PrismaClient;
+
+  constructor() {
+    this.prisma = prismaClient;
+  }
+
   async createProduct({
     name,
     price,
@@ -9,7 +16,7 @@ class ProductRepository {
     description,
     category_id,
   }: CreateProductRequest) {
-    const product = await prismaClient.product.create({
+    const product = await this.prisma.product.create({
       data: {
         name: name,
         price: price,
@@ -31,7 +38,7 @@ class ProductRepository {
   }
 
   async getProductsByCategory(id: string) {
-    const products = await prismaClient.product.findMany({
+    const products = await this.prisma.product.findMany({
       where: {
         category_id: id,
       },
@@ -41,7 +48,7 @@ class ProductRepository {
   }
 
   async checkIfProductExists(name: string) {
-    const product = await prismaClient.product.findFirst({
+    const product = await this.prisma.product.findFirst({
       where: {
         name: name,
       },

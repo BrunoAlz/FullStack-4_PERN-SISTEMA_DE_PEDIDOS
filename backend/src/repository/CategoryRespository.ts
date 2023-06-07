@@ -1,9 +1,16 @@
+import { PrismaClient } from "@prisma/client";
 import { CreateCategory } from "../interfaces/CategoryInterfaces";
 import prismaClient from "../prisma";
 
 class CategoryRepository {
+  prisma: PrismaClient;
+
+  constructor() {
+    this.prisma = prismaClient;
+  }
+
   async createCategory({ category }: CreateCategory) {
-    const user = await prismaClient.category.create({
+    const user = await this.prisma.category.create({
       data: {
         name: category,
       },
@@ -17,12 +24,12 @@ class CategoryRepository {
   }
 
   async getAllCategories() {
-    const getAll = await prismaClient.category.findMany();
+    const getAll = await this.prisma.category.findMany();
     return getAll;
   }
 
   async checkIfCategoryExists({ category }: CreateCategory) {
-    const categoryExists = await prismaClient.category.findFirst({
+    const categoryExists = await this.prisma.category.findFirst({
       where: {
         name: category,
       },

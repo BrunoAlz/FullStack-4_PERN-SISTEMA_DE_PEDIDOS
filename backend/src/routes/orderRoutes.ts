@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { isAuth } from "../middlewares/handleValidation";
-import { OrderController } from "../controllers/orders/orderControllers";
+import { OrderController } from "../controllers/orders/OrderControllers";
 
 const router = Router();
 const orderController = new OrderController();

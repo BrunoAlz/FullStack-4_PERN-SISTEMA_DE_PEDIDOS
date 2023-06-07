@@ -1,8 +1,15 @@
+import { PrismaClient } from "@prisma/client";
 import prismaClient from "../prisma";
 
 class UserRepository {
+  prisma: PrismaClient;
+
+  constructor() {
+    this.prisma = prismaClient;
+  }
+
   async createUser({ name, email, password }: any) {
-    const user = await prismaClient.user.create({
+    const user = await this.prisma.user.create({
       data: {
         name: name,
         email: email,

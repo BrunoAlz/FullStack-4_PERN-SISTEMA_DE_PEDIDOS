@@ -1,4 +1,4 @@
-import { OrdersRepository } from "../../repository/orderRepository";
+import { OrdersRepository } from "../../repository/OrderRepository";
 
 class OrderService {
   orderRepository: OrdersRepository;

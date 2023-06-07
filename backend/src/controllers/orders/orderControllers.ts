@@ -1,5 +1,5 @@
-import { Request, Response, response } from "express";
-import { OrderService } from "../../services/orders/orderService";
+import { Request, Response } from "express";
+import { OrderService } from "../../services/orders/OrderService";
 
 class OrderController {
   orderService: OrderService;
