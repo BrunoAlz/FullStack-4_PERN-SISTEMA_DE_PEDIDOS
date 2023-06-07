@@ -39,7 +39,7 @@ const responseMessages = {
     error: "Está categoria já foi cadastrada.",
   },
   productExists: {
-    error: "Este produto já foi cadastrada.",
+    error: "Este produto já foi cadastrado.",
   },
   fileNotSent: {
     error: "Você precisa cadastrar a foto do Produto.",

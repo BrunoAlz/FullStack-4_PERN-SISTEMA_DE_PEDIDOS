@@ -20,12 +20,12 @@ export default {
         },
       }),
       fileFilter: async (request, file, callback) => {
-        const fileName = file.filename; // Obtém o nome do arquivo
+        const { name } = request.body;
 
         try {
           // Verifica se o registro já existe no banco
           const productExists = await productRepository.checkIfProductExists(
-            fileName
+            name
           );
 
           if (productExists) {
