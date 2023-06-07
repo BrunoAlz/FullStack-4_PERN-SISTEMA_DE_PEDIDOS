@@ -11,7 +11,9 @@ class OrderController {
   create = async (req: Request, res: Response) => {
     const { table, name } = req.body;
 
-    return res.json({ table, name });
+    const order = await this.orderService.create({ table, name });
+
+    return res.json(order);
   };
 }
 
