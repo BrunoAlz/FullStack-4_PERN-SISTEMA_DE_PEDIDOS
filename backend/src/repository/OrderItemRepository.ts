@@ -31,6 +31,24 @@ class OrderItemRepository {
       return responseMessages.notFound;
     }
   }
+
+  async getItensByOrderId(id: string) {
+    const itens = await this.prisma.orderItem.findMany({
+      where: { order_id: id },
+      select: {
+        amount: true,
+        Product: {
+          select: {
+            name: true,
+            price: true,
+            banner: true,
+            description: true,
+          },
+        },
+      },
+    });
+    return itens;
+  }
 }
 
 export { OrderItemRepository };

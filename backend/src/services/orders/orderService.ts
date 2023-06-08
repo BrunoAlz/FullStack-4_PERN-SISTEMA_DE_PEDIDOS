@@ -49,6 +49,27 @@ class OrderService {
     const order = await this.orderRepository.updateDraft(id);
     return order;
   };
+
+  getTotalPrice = (data) => {
+    let total = 0;
+
+    for (const item of data) {
+      const price = parseFloat(item.Product.price as any);
+      const quantity = item.amount;
+      total += price * quantity;
+    }
+
+    return total;
+  };
+
+  getOrderDetails = async (id: string) => {
+    const details = await this.orderRepository.getOrderDetails(id);
+    const total = this.getTotalPrice(details.itens);
+
+    details['total'] = total
+
+    return { ...details };
+  };
 }
 
 export { OrderService };

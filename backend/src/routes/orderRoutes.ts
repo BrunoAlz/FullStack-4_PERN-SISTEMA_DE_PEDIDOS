@@ -12,5 +12,6 @@ router.post("/delete", isAuth, orderController.delete);
 router.post("/additem", isAuth, orderController.addItem);
 router.delete("/removeitem", isAuth, orderController.removeItem);
 router.post("/updatedraft", isAuth, orderController.updateDraft);
+router.post("/details", isAuth, orderController.getDetails);
 
 export { router as orderRoutes };

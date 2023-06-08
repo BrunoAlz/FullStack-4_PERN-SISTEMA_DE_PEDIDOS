@@ -54,6 +54,13 @@ class OrderController {
     const item = await this.orderService.updateDraftStatus(id);
     return res.json(item);
   };
+
+  getDetails = async (req: Request, res: Response) => {
+    const id = req.query.id as string;
+
+    const details = await this.orderService.getOrderDetails(id);
+    return res.json(details);
+  };
 }
 
 export { OrderController };
