@@ -22,7 +22,7 @@ class OrdersRepository {
 
   async listAll() {
     const orders = await this.prisma.order.findMany({
-      where: { draft: false, status: false },
+      where: { draft: false, closed: false },
       orderBy: {
         started_at: "desc",
       },
@@ -67,6 +67,39 @@ class OrdersRepository {
     const itens = await this.orderItemRepository.getItensByOrderId(id);
 
     return { order, itens };
+  }
+
+  async closeOrder(id: string) {
+    const order = await this.prisma.order.findUnique({
+      where: { id: id },
+    });
+
+    if (!order) {
+      throw new Error("Pedido não encontrado.");
+    }
+
+    const startedAt = new Date(order.started_at);
+    const finishedAt = new Date();
+
+    const timeDiffMillis = finishedAt.getTime() - startedAt.getTime();
+    const hours = Math.floor(timeDiffMillis / (1000 * 60 * 60));
+    const minutes = Math.floor(
+      (timeDiffMillis % (1000 * 60 * 60)) / (1000 * 60)
+    );
+    const totalTime = `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}`;
+
+    const updatedOrder = await this.prisma.order.update({
+      where: { id: id },
+      data: {
+        closed: true,
+        finished_at: finishedAt.toISOString(),
+        total_time: totalTime,
+      },
+    });
+
+    return updatedOrder;
   }
 }
 

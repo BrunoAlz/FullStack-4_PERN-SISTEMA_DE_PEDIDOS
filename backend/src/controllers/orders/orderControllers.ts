@@ -61,6 +61,13 @@ class OrderController {
     const details = await this.orderService.getOrderDetails(id);
     return res.json(details);
   };
+
+  closeOrder = async (req: Request, res: Response) => {
+    const id = req.query.id as string;
+
+    const closed = await this.orderService.closeOrder(id);
+    return res.json(closed);
+  };
 }
 
 export { OrderController };

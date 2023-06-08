@@ -66,9 +66,14 @@ class OrderService {
     const details = await this.orderRepository.getOrderDetails(id);
     const total = this.getTotalPrice(details.itens);
 
-    details['total'] = total
+    details["total"] = total;
 
     return { ...details };
+  };
+
+  closeOrder = async (id: string) => {
+    const closed = await this.orderRepository.closeOrder(id);
+    return closed;
   };
 }
 
