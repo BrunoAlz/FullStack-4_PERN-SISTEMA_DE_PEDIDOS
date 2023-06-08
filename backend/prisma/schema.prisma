@@ -57,7 +57,7 @@ model Order {
   draft       Boolean   @default(true)
   name        String?   @db.VarChar(100)
   started_at  DateTime? @default(now())
-  finished_at DateTime? @updatedAt
+  finished_at DateTime? 
   total_time  String?
 
   // Relacionamentos Order
