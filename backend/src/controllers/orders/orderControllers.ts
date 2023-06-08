@@ -47,6 +47,13 @@ class OrderController {
     const item = await this.orderService.deleteItemFromOrder(id);
     return res.json(item);
   };
+
+  updateDraft = async (req: Request, res: Response) => {
+    const id = req.query.id as string;
+
+    const item = await this.orderService.updateDraftStatus(id);
+    return res.json(item);
+  };
 }
 
 export { OrderController };

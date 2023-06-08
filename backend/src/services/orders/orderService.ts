@@ -44,6 +44,11 @@ class OrderService {
     const item = await this.orderItemRepository.removeItem(id);
     return item;
   };
+
+  updateDraftStatus = async (id: string) => {
+    const order = await this.orderRepository.updateDraft(id);
+    return order;
+  };
 }
 
 export { OrderService };

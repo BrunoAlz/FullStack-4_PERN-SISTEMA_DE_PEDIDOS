@@ -44,6 +44,9 @@ const responseMessages = {
   fileNotSent: {
     error: "Você precisa cadastrar a foto do Produto.",
   },
+  draftStatus: {
+    success: "O Pedido foi enviado.",
+  },
 };
 
 export { responseMessages };

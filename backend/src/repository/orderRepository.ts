@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import prismaClient from "../prisma";
+import { responseMessages } from "../constants/responseMessages";
 
 class OrdersRepository {
   private prisma: PrismaClient;
@@ -32,6 +33,29 @@ class OrdersRepository {
     });
 
     return order;
+  }
+
+  async getDraftStatus(id: string) {
+    const status = await this.prisma.order.findFirst({
+      where: { id: id },
+      select: { draft: true },
+    });
+
+    return status.draft;
+  }
+
+  async updateDraft(id: string) {
+    try {
+      const status = await this.getDraftStatus(id);
+
+      const item = await this.prisma.order.update({
+        where: { id: id },
+        data: { draft: !status },
+      });
+      return item;
+    } catch (error) {
+      return responseMessages.notFound;
+    }
   }
 }
 
