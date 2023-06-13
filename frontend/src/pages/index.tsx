@@ -6,6 +6,7 @@ import logoImg from '../../public/logo.svg'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -25,9 +26,11 @@ export default function Home() {
             </Button>
           </form>
 
-          <a className={style.text}>
-            Não é registrado? Cadastre-se
-          </a>
+          <Link href="/singup">
+            <p className={style.text}>
+              Não é registrado? Cadastre-se
+            </p>
+          </Link>
         </div>
       </div>
     </>
