@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
-import { destroyCookie } from 'nookies'
+import { destroyCookie, setCookie } from 'nookies'
 import Router from "next/router";
+import { api } from "@/services/apiClient";
 
 type AuthContextData = {
     user: UserProps;
@@ -30,7 +31,7 @@ export const AuthContext = createContext({} as AuthContextData)
 export function singOut() {
     try {
         destroyCookie(undefined, '@nextauth.token')
-        Router.push("/")
+        Router.push('/')
     } catch (error) {
         console.log("ERRO AO DESLOGAR");
     }
@@ -41,8 +42,33 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const isAuthenticated = !!user;
 
     async function singIn({ email, password }: SingInProps) {
-        alert("CHAMOU O SING IN " + email + password);
 
+        const response = await api.post('/auth/login', {
+            email,
+            password
+        })
+
+        const { id, name, token } = response.data
+        
+        if (!token) {
+            alert(response.data.error)
+        } else {
+            setCookie(undefined, '@nextauth.token', token, {
+                maxAge: 60 * 60 * 25 * 30,
+                path: "/"
+            })
+
+            setUser({
+                id: id,
+                name: name,
+                email: email
+            })
+
+            api.defaults.headers['Authorization'] = `Bearer ${token}`
+
+            Router.push('/dashboard')
+
+        }
     }
 
     return (
