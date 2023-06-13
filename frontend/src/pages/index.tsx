@@ -21,11 +21,19 @@ export default function Home() {
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
 
+    if (email === '' || password === '') {
+      return;
+    }
+
+    setLoading(true);
+
     let data = {
       email,
       password
     }
     await singIn(data);
+
+    setLoading(false);
   }
 
   return (
@@ -49,7 +57,7 @@ export default function Home() {
               type='password'
               onChange={(e) => setPassword(e.target.value)} />
 
-            <Button type="submit" loading={false}>
+            <Button type="submit" loading={loading}>
               Entrar
             </Button>
           </form>
