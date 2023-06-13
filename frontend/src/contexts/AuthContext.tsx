@@ -13,7 +13,7 @@ type UserProps = {
 }
 
 type SingInProps = {
-    name: string;
+    email: string;
     password: string;
 }
 
@@ -28,7 +28,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserProps>();
     const isAuthenticated = !!user;
 
-    async function singIn() {
+    async function singIn({ email, password }: SingInProps) {
+        alert("CHAMOU O SING IN " + email + password);
 
     }
 
