@@ -24,6 +24,10 @@ export default function Home() {
               Entrar
             </Button>
           </form>
+
+          <a className={style.text}>
+            Não é registrado? Cadastre-se
+          </a>
         </div>
       </div>
     </>
