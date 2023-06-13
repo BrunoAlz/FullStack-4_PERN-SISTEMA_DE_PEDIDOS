@@ -24,8 +24,13 @@ class AuthUserService {
 
     const jwt = new JWT();
     const token = jwt.generateToken(user.id, user.email);
+    const response = {
+      id: user.id,
+      name: user.name,
+      token: token,
+    };
 
-    return { token };
+    return { ...response };
   };
 }
 
