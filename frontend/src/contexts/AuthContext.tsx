@@ -2,13 +2,15 @@ import { createContext, ReactNode, useState } from "react";
 import { destroyCookie, setCookie } from 'nookies'
 import Router from "next/router";
 import { api } from "@/services/apiClient";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 type AuthContextData = {
     user: UserProps;
     isAuthenticated: boolean;
     singIn: (credentials: SingInProps) => Promise<void>
+    singUp: (credentials: SingUpProps) => Promise<void>
     singOut: () => void;
+
 }
 
 type UserProps = {
@@ -20,6 +22,13 @@ type UserProps = {
 type SingInProps = {
     email: string;
     password: string;
+}
+
+type SingUpProps = {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
 }
 
 
@@ -72,8 +81,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     }
 
+    async function singUp({ name, email, password, confirmPassword }: SingUpProps) {
+   
+        const response = await api.post('/user/create', {
+            name,
+            email,
+            password,
+            confirmPassword
+        })
+
+        console.log(response)
+
+    }
+
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, singIn, singOut }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, singIn, singOut, singUp }}>
             {children}
         </AuthContext.Provider>
     )

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import style from "../../styles/Home.module.scss";
@@ -10,21 +10,43 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
+import { AuthContext } from "@/contexts/AuthContext";
+
+
 export default function Singup() {
+
+  const { singUp } = useContext(AuthContext)
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSingUp(event: FormEvent) {
     event.preventDefault();
 
-    if (name === '' || email === '' || password === '') {
+    if (name === '' || email === '' || password === '' || confirmPassword === '') {
       toast.error("Preencha todos os campos");
       return;
     }
 
+    if (password !== confirmPassword){
+      toast.error("As senhas devem ser iguais.")
+    }
+
     setLoading(true)
+
+    let data = {
+      name,
+      email,
+      password,
+      confirmPassword
+    }
+
+    await singUp(data);
+
+    setLoading(false);
   }
 
   return (
@@ -55,6 +77,11 @@ export default function Singup() {
               placeholder="Digite sua Senha"
               type="password" value={password}
               onChange={(e) => setPassword(e.target.value)} />
+
+            <Input
+              placeholder="Confirmação da senha"
+              type="password" value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)} />
 
             <Button type="submit" loading={loading}>
               Cadastrar
